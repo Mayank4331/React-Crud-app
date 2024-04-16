@@ -17,7 +17,7 @@ const Login = () => {
     const submitHandler=(event)=>{
         setLoading(true);
         event.preventDefault();
-    axios.post('https://mern-api-k8fz.onrender.com/user/login',{
+    axios.post('https://react-crud-app-wxsm.onrender.com/user/login',{
         userName:userName,
         password:password,
         

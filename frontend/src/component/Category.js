@@ -19,7 +19,7 @@ const Category = () => {
 const deleteRouter =(id,image)=>{
   if(window.confirm('Are You Sure?'))
 {
-     axios.delete('https://mern-api-k8fz.onrender.com/category?id='+id+'&imageUrl='+image)
+     axios.delete('https://react-crud-app-wxsm.onrender.com/category?id='+id+'&imageUrl='+image)
      .then(res=>{
        console.log(res);
        getData();
@@ -32,7 +32,7 @@ const deleteRouter =(id,image)=>{
 }
 const getData=  ()=>{
   console.log(localStorage.getItem('token'))
-   axios.get('https://mern-api-k8fz.onrender.com/category', {
+   axios.get('https://react-crud-app-wxsm.onrender.com/category', {
     headers: {
       Authorization: 'Bearer ' + localStorage.getItem('token'),
     },
@@ -42,12 +42,13 @@ const getData=  ()=>{
   .then(res=>{
     setHasError(false);
     setLoading(false);
-    console.log(res.data);
+    if(res?.data?.category)
     setCategoryList(res.data.category);
   })
   .catch(err=>{
-    console.log(err.response.data.message);
+    // console.log(err.response.data.message);
     setHasError(true);
+    if(err?.response?.data?.msg)
     setError(err.response.data.msg);
     setLoading(false);
   })
@@ -79,7 +80,7 @@ const getData=  ()=>{
              </tr>
           </thead>
           <tbody>
-               {categoryList?.map(data=><Row key={data._id} updateReq={updateRouter} deleteReq={deleteRouter} detailReq={detailRouter} detail={data}/>)}
+               {categoryList.length && categoryList?.map(data=><Row key={data._id} updateReq={updateRouter} deleteReq={deleteRouter} detailReq={detailRouter} detail={data}/>)}
           </tbody>
         </table>
         </div>}
