@@ -28,13 +28,7 @@ app.use(fileUpload({
   useTempFiles:true
 }))
 
-app.use(cors(
-     {
-    origin:["https://react-crud-app-flax.vercel.app"],
-    methods:["POST","GET"],
-    credential:true
-  }
-));
+app.use(cors());
 
 // app.use('/product',productRoute);
 app.use('/user',userRoute);
